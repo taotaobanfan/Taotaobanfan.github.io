@@ -6,5 +6,21 @@ output:
     toc_float: true
 ---
 
+## About myself
+
+My name is Yue Lai. I come from [Hangzhou](https://en.wikipedia.org/wiki/Hangzhou), China. In September 2015, Hangzhou was awarded the [2022 Asian Games](https://en.wikipedia.org/wiki/2022_Asian_Games).
+
+I graduated from [Zhejiang University](http://www.zju.edu.cn/english/).  
 
 This is my [resume](Resume.html).
+
+## My favorite picture
+
+<img src="photo.jpg" style="width:75%">
+
+## Problem 2
+
+In Problem 2, I used [Instacart](https://p8105.com/dataset_instacart.html) dataset. First, I calculated the  number of items ordered in each aisle, and limited the data to fifteen most popular aisles. Next, make three plot of "Number of items ordered in popular aisles", "Number of popular aisles ordered in each day of the week" and "Order hour of day of popular aisles". 
+
+
+
