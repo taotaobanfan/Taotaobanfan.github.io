@@ -1,0 +1,75 @@
+---
+title: "Instacart Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(ggplot2)
+library(plotly)
+library(p8105.datasets)
+```
+
+```{r}
+data("instacart")
+
+data_instacart = instacart %>% 
+  select(order_dow, order_hour_of_day, product_name, aisle, department) %>% 
+  mutate(order_dow = factor(order_dow, levels = c("0", "1", "2", "3", "4", "5", "6")),
+         order_dow = recode(order_dow, "0" = "Sunday", "1" = "Monday", "2" = "Tuesday", "3" = "Wednesday", "4" = "Thursday", "5" = "Friday", "6" = "Saturay")) 
+
+instacart_aisle = instacart %>% 
+  group_by(aisle) %>% 
+  summarize(n = n()) %>%
+  mutate(ranking = min_rank(desc(n))) %>% 
+  filter(ranking %in% 1:15) %>% 
+  pull(aisle)
+```
+
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Number of items ordered in popular aisles
+
+```{r}
+data_instacart %>% 
+  group_by(aisle) %>% 
+  summarize(n = n()) %>% 
+  filter(aisle %in% instacart_aisle) %>%
+  mutate(aisle = fct_reorder(aisle, n)) %>% 
+  plot_ly(x = ~aisle, y = ~n, color = ~aisle, type = "bar") %>% 
+  layout(xaxis = list(title = 'Aisle'),
+         yaxis = list(title = 'n'))
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Number of popular aisles ordered in each day of the week
+
+```{r}
+data_instacart %>% 
+  group_by(aisle, order_dow) %>% 
+  summarize(n = n()) %>% 
+  filter(aisle %in% instacart_aisle ) %>% 
+  plot_ly(x = ~order_dow, y = ~n, color = ~aisle, type = "scatter", mode = "lines") %>% 
+  layout(xaxis = list(title = 'Day of the week'),
+         yaxis = list(title = 'n'))
+```
+
+### Order hour of day of popular aisles
+
+```{r}
+data_instacart %>%
+  filter(aisle %in% instacart_aisle) %>% 
+  mutate(aisle = fct_reorder(aisle, order_hour_of_day)) %>% 
+  plot_ly(x = ~aisle, y = ~order_hour_of_day, color = ~aisle, type = "box") %>% 
+  layout(xaxis = list(title = 'Aisles'),
+         yaxis = list(title = 'Order hour of day'))
+```
+

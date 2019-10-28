@@ -2,12 +2,15 @@ name: "Yay internet!"
 output_dir: "."
 navbar:
   title: "Home"
-  left:
-    - text: "Plotly"
-      href: plotly.html
+  right:
     - text: "Resume"
       href: Resume.html
-  right:
+    - text: "Problem 2"
+      menu:
+      - text: "Plotly"
+        href: plotly.html
+      - text: "Dashboard"
+        href: dashboard.html
     - icon: fa-envelope fa-lg
       href: mailto:<yl4359@cumc.columbia.com>
     - icon: fa-github fa-lg
