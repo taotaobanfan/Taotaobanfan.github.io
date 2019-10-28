@@ -31,7 +31,7 @@ instacart_aisle = instacart %>%
 ```
 
 
-Column {data-width=650}
+Column {data-width=550}
 -----------------------------------------------------------------------
 
 ### Number of items ordered in popular aisles
@@ -47,7 +47,7 @@ data_instacart %>%
          yaxis = list(title = 'n'))
 ```
 
-Column {data-width=350}
+Column {data-width=450}
 -----------------------------------------------------------------------
 
 ### Number of popular aisles ordered in each day of the week
